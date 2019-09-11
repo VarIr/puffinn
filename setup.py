@@ -13,18 +13,16 @@ except ImportError:
     sys.stderr.write('Setuptools not found!\n')
     raise
 
-extra_args = ['-std=c++14', '-march=native', '-O3', ]
+extra_args = ['-std=c++14', '-march=native', '-O3', '-fopenmp']
 if sys.platform == 'darwin':
-    extra_args += ['-mmacosx-version-min=10.14', '-stdlib=libc++']
-    os.environ['LDFLAGS'] = '-mmacosx-version-min=10.14'
-else:
-    extra_args += ['-fopenmp']
+    extra_args += ['-mmacosx-version-min=10.13', ]  # '-stdlib=libc++']
+    os.environ['LDFLAGS'] = '-mmacosx-version-min=10.13'
 
 module = Extension(
     'puffinn',
     sources=['python/wrapper/python_wrapper.cpp'],
     extra_compile_args=extra_args,
-    extra_link_args=['-fopenmp'] if sys.platform != 'darwin' else [],
+    extra_link_args=['-fopenmp'],
     include_dirs=['include', 'external/pybind11/include', 'libs'])
 
 setup(

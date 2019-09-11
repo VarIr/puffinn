@@ -15,8 +15,8 @@ except ImportError:
 
 extra_args = ['-std=c++14', '-march=native', '-O3', '-fopenmp']
 if sys.platform == 'darwin':
-    extra_args += ['-mmacosx-version-min=10.9', '-stdlib=libc++']
-    os.environ['LDFLAGS'] = '-mmacosx-version-min=10.9'
+    extra_args += ['-mmacosx-version-min=10.13', '-stdlib=libc++']
+    os.environ['LDFLAGS'] = '-mmacosx-version-min=10.13'
 
 module = Extension(
     'puffinn',
